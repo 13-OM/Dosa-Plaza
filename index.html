@@ -1,0 +1,123 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dosa Plaza</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <style>
+    body { font-family: 'Poppins', sans-serif; }
+  </style>
+</head>
+<body class="bg-white text-gray-800">
+  <!-- Navbar -->
+  <header class="bg-green-100 shadow fixed top-0 left-0 right-0 z-50">
+    <div class="container mx-auto px-4 py-6 flex justify-between items-center">
+      <div class="flex items-center space-x-4">
+        <img src="image1.jpg" alt="Dosa Plaza Logo" class="w-20 h-20 rounded-full" />
+        <h1 class="text-4xl font-bold text-green-700">Dosa Plaza</h1>
+      </div>
+      <nav class="space-x-6 text-lg">
+        <a href="#" class="text-green-700 hover:text-green-900">Home</a>
+        <a href="#menu" class="text-green-700 hover:text-green-900">Menu</a>
+        <a href="#about" class="text-green-700 hover:text-green-900">About</a>
+        <a href="#contact" class="text-green-700 hover:text-green-900">Contact</a>
+      </nav>
+    </div>
+  </header>  <!-- Hero Section -->  <section class="bg-yellow-50 py-20 text-center mt-24">
+    <h2 class="text-4xl font-bold mb-4 text-green-800">Welcome to Dosa Plaza</h2>
+    <p class="text-lg mb-6 text-green-600">Delicious South Indian food that touches your soul!</p>
+    <button onclick="openMenu()" class="bg-green-600 text-white px-6 py-2 rounded-full hover:bg-green-700 transition">Explore Menu</button>
+  </section>  <!-- Menu Modal -->  <div id="menuModal" class="fixed inset-0 bg-black bg-opacity-50 hidden justify-center items-center z-50">
+    <div class="bg-white rounded-xl p-4 max-w-5xl w-full relative animate_animated animate_zoomIn">
+      <button onclick="closeMenu()" class="absolute top-2 right-2 text-xl text-gray-700">&times;</button>
+      <img src="menu.jpg" alt="Dosa Plaza Menu" class="w-full rounded-xl shadow-xl" />
+    </div>
+  </div>  <!-- Menu Highlights -->  <section id="menu" class="py-16 bg-white">
+    <div class="text-center mb-10">
+      <h3 class="text-3xl font-bold text-green-800 animate_animated animate_fadeInUp">Our Specials</h3>
+      <p class="text-green-600 animate_animated animate_fadeInUp">Taste the most loved dosas from our kitchen</p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-8 px-6 max-w-6xl mx-auto">
+      <div class="bg-yellow-100 p-6 rounded-xl shadow animate_animated animate_fadeInLeft">
+        <img src="image4.jpg" alt="Masala Dosa" class="rounded-xl mb-4">
+        <h4 class="font-bold text-xl text-green-700">Masala Dosa</h4>
+        <p class="text-green-600">Classic potato-stuffed dosa served with chutneys and sambar.</p>
+      </div>
+      <div class="bg-yellow-100 p-6 rounded-xl shadow animate_animated animate_fadeInUp">
+        <img src="image2.jpg" alt="Paneer Dosa" class="rounded-xl mb-4">
+        <h4 class="font-bold text-xl text-green-700">Paneer Dosa</h4>
+        <p class="text-green-600">A delicious fusion of dosa and spicy paneer stuffing.</p>
+      </div>
+      <div class="bg-yellow-100 p-6 rounded-xl shadow animate_animated animate_fadeInRight">
+        <img src="image3.jpg" alt="Cheese Burst Dosa" class="rounded-xl mb-4">
+        <h4 class="font-bold text-xl text-green-700">Cheese Burst Dosa</h4>
+        <p class="text-green-600">Crispy dosa oozing with molten cheese—every bite is heaven.</p>
+      </div>
+    </div>
+  </section>  <!-- About Section -->  <section id="about" class="bg-green-100 py-16 px-6 text-center">
+    <div class="max-w-4xl mx-auto animate_animated animate_fadeInUp">
+      <h3 class="text-3xl font-bold mb-4 text-green-800">About Dosa Plaza</h3>
+      <p class="text-green-700">Dosa Plaza is a modern South Indian restaurant that brings the authentic flavors of tradition with a touch of innovation. Our chefs craft every dosa with passion, using fresh ingredients and love.</p>
+    </div>
+  </section>  <!-- Testimonials -->  <section class="py-16 bg-white text-center">
+    <h3 class="text-3xl font-bold mb-10 text-green-800">What Our Customers Say</h3>
+    <div class="grid md:grid-cols-3 gap-8 px-6 max-w-6xl mx-auto">
+      <div class="bg-yellow-100 p-6 rounded-xl shadow animate_animated animate_fadeInLeft">
+        <p class="text-green-700">“Best dosa experience ever! Love the variety.”</p>
+        <p class="mt-4 font-semibold text-green-800">— Riya S.</p>
+      </div>
+      <div class="bg-yellow-100 p-6 rounded-xl shadow animate_animated animate_fadeInUp">
+        <p class="text-green-700">“Family-friendly place with amazing sambar!”</p>
+        <p class="mt-4 font-semibold text-green-800">— Arun K.</p>
+      </div>
+      <div class="bg-yellow-100 p-6 rounded-xl shadow animate_animated animate_fadeInRight">
+        <p class="text-green-700">“The cheese dosa is out of this world. Highly recommend!”</p>
+        <p class="mt-4 font-semibold text-green-800">— Sneha M.</p>
+      </div>
+    </div>
+  </section>  <!-- Contact Section -->  <section id="contact" class="bg-green-100 py-16 px-6">
+    <div class="max-w-3xl mx-auto text-center animate_animated animate_fadeInUp">
+      <h3 class="text-3xl font-bold mb-6 text-green-800">Get in Touch</h3>
+      <form id="contactForm" class="space-y-4">
+        <input name="name" type="text" placeholder="Your Name" class="w-full p-3 rounded-md" required />
+        <input name="email" type="email" placeholder="Your Email" class="w-full p-3 rounded-md" required />
+        <textarea name="message" placeholder="Your Message" rows="4" class="w-full p-3 rounded-md" required></textarea>
+        <button type="submit" class="bg-green-600 text-white px-6 py-2 rounded-full hover:bg-green-700">Send Message</button>
+      </form>
+      <p id="formMessage" class="mt-4 text-green-700"></p>
+    </div>
+  </section>  <!-- Footer -->  <footer class="bg-green-600 text-white text-center py-4">
+    <p>&copy; 2025 Dosa Plaza. All rights reserved.</p>
+  </footer>  <script>
+    function openMenu() {
+      document.getElementById('menuModal').classList.remove('hidden');
+    }
+    function closeMenu() {
+      document.getElementById('menuModal').classList.add('hidden');
+    }
+
+    document.getElementById("contactForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const form = e.target;
+      const data = {
+        name: form.name.value,
+        email: form.email.value,
+        message: form.message.value
+      };
+      const res = await fetch("http://localhost:5000/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      });
+      const msg = document.getElementById("formMessage");
+      if (res.ok) {
+        msg.textContent = "Message sent successfully!";
+        form.reset();
+      } else {
+        msg.textContent = "Failed to send message. Try again later.";
+      }
+    });
+  </script></body>
+</html>
