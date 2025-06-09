@@ -14,6 +14,9 @@
     html {
       scroll-padding-top: 6rem;
     }
+    .mobile-nav-link {
+      @apply block px-4 py-3 border-b border-green-200 text-green-800 font-semibold hover:bg-green-50 transition;
+    }
   </style>
 </head>
 <body class="bg-white text-gray-800">
@@ -25,22 +28,25 @@
         <img src="image1.jpg" alt="Dosa Plaza Logo" class="w-14 h-14 rounded-full hover:scale-110 transition duration-300" />
         <h1 class="text-2xl md:text-4xl font-bold text-green-700">Dosa Plaza</h1>
       </div>
-      <div class="md:hidden">
-        <button id="menuToggle" class="text-green-700 text-3xl">&#9776;</button>
-      </div>
-      <nav id="navMenu" class="hidden md:flex space-x-6 text-lg">
+      <!-- Hamburger -->
+      <button id="menuToggle" class="md:hidden text-3xl text-green-700 focus:outline-none">
+        &#9776;
+      </button>
+      <!-- Desktop Menu -->
+      <nav class="hidden md:flex space-x-6 text-lg">
         <a href="#" class="text-green-700 hover:text-green-900">Home</a>
         <a href="#menu" class="text-green-700 hover:text-green-900">Menu</a>
         <a href="#about" class="text-green-700 hover:text-green-900">About</a>
         <a href="#contact" class="text-green-700 hover:text-green-900">Contact</a>
       </nav>
     </div>
-    <!-- Mobile nav -->
-    <div id="mobileNav" class="md:hidden hidden bg-green-50 px-6 pb-4">
-      <a href="#" class="block py-2 text-green-700">Home</a>
-      <a href="#menu" class="block py-2 text-green-700">Menu</a>
-      <a href="#about" class="block py-2 text-green-700">About</a>
-      <a href="#contact" class="block py-2 text-green-700">Contact</a>
+
+    <!-- Mobile Dropdown Menu -->
+    <div id="mobileNav" class="md:hidden hidden bg-green-50 px-4 pb-4 shadow-inner">
+      <a href="#" class="mobile-nav-link">Home</a>
+      <a href="#menu" class="mobile-nav-link">Menu</a>
+      <a href="#about" class="mobile-nav-link">About</a>
+      <a href="#contact" class="mobile-nav-link">Contact</a>
     </div>
   </header>
 
@@ -136,6 +142,7 @@
 
   <!-- Scripts -->
   <script>
+    // Toggle menu modal
     function openMenu() {
       document.getElementById('menuModal').classList.remove('hidden');
     }
@@ -143,13 +150,13 @@
       document.getElementById('menuModal').classList.add('hidden');
     }
 
-    // Mobile menu toggle
+    // Mobile nav toggle
     document.getElementById('menuToggle').addEventListener('click', function () {
       const mobileNav = document.getElementById('mobileNav');
       mobileNav.classList.toggle('hidden');
     });
 
-    // Contact form submission
+    // Contact form handling
     document.getElementById("contactForm").addEventListener("submit", async (e) => {
       e.preventDefault();
       const form = e.target;
@@ -171,10 +178,7 @@
 
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
   <script>
-    AOS.init({
-      duration: 1000,
-      once: true
-    });
+    AOS.init({ duration: 1000, once: true });
   </script>
 </body>
 </html>
