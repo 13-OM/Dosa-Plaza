@@ -2,11 +2,43 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Dosa Plaza</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
   <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+    }
+    #loader {
+      position: fixed;
+      inset: 0;
+      background: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    #scrollTopBtn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background-color: #16a34a;
+      color: white;
+      border: none;
+      padding: 12px 16px;
+      border-radius: 50%;
+      font-size: 20px;
+      cursor: pointer;
+      display: none;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      z-index: 999;
+    }
+  </style>
   <script>
     tailwind.config = {
       theme: {
@@ -18,13 +50,20 @@
       }
     }
   </script>
-  <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-    }
-  </style>
 </head>
 <body class="bg-white text-gray-800">
+
+  <!-- Page Loader -->
+  <div id="loader">
+    <svg class="animate-spin h-10 w-10 text-green-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+      <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+    </svg>
+  </div>
+
+  <!-- Scroll to Top Button -->
+  <button id="scrollTopBtn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑</button>
+
   <!-- Navbar -->
   <header class="bg-green-100 shadow fixed top-0 left-0 right-0 z-50">
     <div class="container mx-auto px-4 py-4 flex justify-between items-center">
@@ -32,11 +71,7 @@
         <img src="image1.jpg" alt="Dosa Plaza Logo" class="w-14 h-14 rounded-full hover:scale-110 transition duration-300" />
         <h1 class="text-2xl font-bold text-green-700">Dosa Plaza</h1>
       </div>
-      <!-- Hamburger Menu Button -->
-      <button class="md:hidden text-3xl" onclick="toggleDrawer()">
-        ☰
-      </button>
-      <!-- Desktop Nav -->
+      <button class="md:hidden text-3xl" onclick="toggleDrawer()">☰</button>
       <nav class="hidden md:flex space-x-6 text-lg">
         <a href="#" class="text-green-700 hover:text-green-900">Home</a>
         <a href="#menu" class="text-green-700 hover:text-green-900">Menu</a>
@@ -44,12 +79,11 @@
         <a href="#contact" class="text-green-700 hover:text-green-900">Contact</a>
       </nav>
     </div>
-    <!-- Mobile Drawer -->
     <div id="mobileDrawer" class="md:hidden hidden flex-col bg-green-50 px-4 py-2 space-y-2 text-lg">
-      <a href="#" class="block text-green-700 hover:text-green-900" onclick="toggleDrawer()">Home</a>
-      <a href="#menu" class="block text-green-700 hover:text-green-900" onclick="toggleDrawer()">Menu</a>
-      <a href="#about" class="block text-green-700 hover:text-green-900" onclick="toggleDrawer()">About</a>
-      <a href="#contact" class="block text-green-700 hover:text-green-900" onclick="toggleDrawer()">Contact</a>
+      <a href="#" class="block text-green-700 hover:text-green-900">Home</a>
+      <a href="#menu" class="block text-green-700 hover:text-green-900">Menu</a>
+      <a href="#about" class="block text-green-700 hover:text-green-900">About</a>
+      <a href="#contact" class="block text-green-700 hover:text-green-900">Contact</a>
     </div>
   </header>
 
@@ -64,7 +98,7 @@
 
   <!-- Menu Modal -->
   <div id="menuModal" class="fixed inset-0 bg-black bg-opacity-50 hidden justify-center items-center z-50">
-    <div class="bg-white rounded-xl p-4 max-w-4xl w-full relative animate__animated animate__zoomIn">
+    <div class="bg-white rounded-xl p-4 max-w-4xl w-full relative">
       <button onclick="closeMenu()" class="absolute top-2 right-4 text-3xl text-gray-700">&times;</button>
       <img src="menu.jpg" alt="Dosa Plaza Menu" class="w-full rounded-xl shadow-lg" />
     </div>
@@ -145,17 +179,48 @@
 
   <!-- Scripts -->
   <script>
+    // Page loader hide
+    window.addEventListener("load", () => {
+      document.getElementById("loader").style.display = "none";
+    });
+
+    // Scroll to top button show/hide
+    const scrollTopBtn = document.getElementById("scrollTopBtn");
+    window.addEventListener("scroll", () => {
+      scrollTopBtn.style.display = window.scrollY > 300 ? "block" : "none";
+
+      // Close drawer on scroll
+      const drawer = document.getElementById("mobileDrawer");
+      if (!drawer.classList.contains("hidden")) {
+        drawer.classList.add("hidden");
+      }
+
+      // Active nav link
+      const sections = document.querySelectorAll("section[id]");
+      const navLinks = document.querySelectorAll("nav a, #mobileDrawer a");
+      let index = sections.length;
+      while (--index && window.scrollY + 120 < sections[index].offsetTop) {}
+      navLinks.forEach(link => link.classList.remove('font-bold', 'underline', 'text-green-900'));
+      const activeID = sections[index]?.getAttribute('id');
+      navLinks.forEach(link => {
+        if (link.getAttribute('href') === `#${activeID}`) {
+          link.classList.add('font-bold', 'underline', 'text-green-900');
+        }
+      });
+    });
+
+    // Modal & drawer
     function openMenu() {
-      document.getElementById('menuModal').classList.remove('hidden');
+      document.getElementById("menuModal").classList.remove("hidden");
     }
     function closeMenu() {
-      document.getElementById('menuModal').classList.add('hidden');
+      document.getElementById("menuModal").classList.add("hidden");
     }
     function toggleDrawer() {
-      const drawer = document.getElementById('mobileDrawer');
-      drawer.classList.toggle('hidden');
+      document.getElementById("mobileDrawer").classList.toggle("hidden");
     }
 
+    // Contact form
     document.getElementById("contactForm").addEventListener("submit", async (e) => {
       e.preventDefault();
       const form = e.target;
@@ -175,11 +240,7 @@
     });
   </script>
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-  <script>
-    AOS.init({
-      duration: 1000,
-      once: true
-    });
-  </script>
+  <script>AOS.init({ duration: 1000, once: true });</script>
+
 </body>
 </html>
