@@ -1,38 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dosa Plaza</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
   <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Poppins', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
   <style>
     body {
       font-family: 'Poppins', sans-serif;
     }
-    html {
-      scroll-padding-top: 6rem;
-    }
-    .mobile-nav-link {
-      @apply block px-4 py-3 border-b border-green-200 text-green-800 font-semibold hover:bg-green-50 transition;
-    }
   </style>
 </head>
-<body class="bg-white text-gray-800">
-
-  <!-- Navbar -->
-  <header class="bg-green-100 shadow fixed top-0 left-0 right-0 z-50">
+<body class="bg-white text-gray-800">  <!-- Navbar -->  <header class="bg-green-100 shadow fixed top-0 left-0 right-0 z-50">
     <div class="container mx-auto px-4 py-4 flex justify-between items-center">
       <div class="flex items-center space-x-4">
         <img src="image1.jpg" alt="Dosa Plaza Logo" class="w-14 h-14 rounded-full hover:scale-110 transition duration-300" />
-        <h1 class="text-2xl md:text-4xl font-bold text-green-700">Dosa Plaza</h1>
+        <h1 class="text-2xl font-bold text-green-700">Dosa Plaza</h1>
       </div>
-      <!-- Hamburger -->
-      <button id="menuToggle" class="md:hidden text-3xl text-green-700 focus:outline-none">
-        &#9776;
+      <!-- Hamburger Menu Button -->
+      <button class="md:hidden text-3xl" onclick="toggleDrawer()">
+        ☰
       </button>
-      <!-- Desktop Menu -->
+      <!-- Desktop Nav -->
       <nav class="hidden md:flex space-x-6 text-lg">
         <a href="#" class="text-green-700 hover:text-green-900">Home</a>
         <a href="#menu" class="text-green-700 hover:text-green-900">Menu</a>
@@ -40,35 +41,25 @@
         <a href="#contact" class="text-green-700 hover:text-green-900">Contact</a>
       </nav>
     </div>
-
-    <!-- Mobile Dropdown Menu -->
-    <div id="mobileNav" class="md:hidden hidden bg-green-50 px-4 pb-4 shadow-inner">
-      <a href="#" class="mobile-nav-link">Home</a>
-      <a href="#menu" class="mobile-nav-link">Menu</a>
-      <a href="#about" class="mobile-nav-link">About</a>
-      <a href="#contact" class="mobile-nav-link">Contact</a>
+    <!-- Mobile Drawer -->
+    <div id="mobileDrawer" class="md:hidden hidden flex-col bg-green-50 px-4 py-2 space-y-2 text-lg">
+      <a href="#" class="block text-green-700 hover:text-green-900">Home</a>
+      <a href="#menu" class="block text-green-700 hover:text-green-900">Menu</a>
+      <a href="#about" class="block text-green-700 hover:text-green-900">About</a>
+      <a href="#contact" class="block text-green-700 hover:text-green-900">Contact</a>
     </div>
-  </header>
-
-  <!-- Hero Section -->
-  <section class="bg-yellow-50 py-24 text-center mt-40" data-aos="fade-down">
+  </header>  <!-- Hero Section -->  <section class="bg-yellow-50 py-24 text-center mt-24" data-aos="fade-down">
     <h2 class="text-4xl font-bold mb-4 text-green-800">Welcome to Dosa Plaza</h2>
     <p class="text-lg mb-6 text-green-600">Delicious South Indian food that touches your soul!</p>
     <button onclick="openMenu()" class="bg-green-600 text-white px-6 py-2 rounded-full hover:bg-green-700 transition hover:scale-110">
       Explore Menu
     </button>
-  </section>
-
-  <!-- Menu Modal -->
-  <div id="menuModal" class="fixed inset-0 bg-black bg-opacity-50 hidden justify-center items-center z-50">
-    <div class="bg-white rounded-xl p-4 max-w-4xl w-full relative" data-aos="zoom-in">
+  </section>  <!-- Menu Modal -->  <div id="menuModal" class="fixed inset-0 bg-black bg-opacity-50 hidden justify-center items-center z-50">
+    <div class="bg-white rounded-xl p-4 max-w-4xl w-full relative animate__animated animate__zoomIn">
       <button onclick="closeMenu()" class="absolute top-2 right-4 text-3xl text-gray-700">&times;</button>
       <img src="menu.jpg" alt="Dosa Plaza Menu" class="w-full rounded-xl shadow-lg" />
     </div>
-  </div>
-
-  <!-- Menu Section -->
-  <section id="menu" class="py-16 bg-white">
+  </div>  <!-- Menu Section -->  <section id="menu" class="py-16 bg-white">
     <div class="text-center mb-10" data-aos="fade-up">
       <h3 class="text-3xl font-bold text-green-800">Our Specials</h3>
       <p class="text-green-600">Taste the most loved dosas from our kitchen</p>
@@ -90,18 +81,12 @@
         <p class="text-green-600">Cheesy, crispy dosa for the ultimate indulgence.</p>
       </div>
     </div>
-  </section>
-
-  <!-- About Section -->
-  <section id="about" class="bg-green-100 py-16 px-6 text-center" data-aos="fade-up">
+  </section>  <!-- About Section -->  <section id="about" class="bg-green-100 py-16 px-6 text-center" data-aos="fade-up">
     <div class="max-w-4xl mx-auto">
       <h3 class="text-3xl font-bold text-green-800">About Dosa Plaza</h3>
       <p class="text-green-700">We blend authentic South Indian flavors with innovation. Every dosa is made with love and fresh ingredients!</p>
     </div>
-  </section>
-
-  <!-- Testimonials -->
-  <section class="py-16 bg-white text-center">
+  </section>  <!-- Testimonials -->  <section class="py-16 bg-white text-center">
     <h3 class="text-3xl font-bold mb-10 text-green-800" data-aos="fade-up">What Our Customers Say</h3>
     <div class="grid md:grid-cols-3 gap-8 px-6 max-w-6xl mx-auto">
       <div class="bg-yellow-100 p-6 rounded-xl shadow-md" data-aos="fade-right">
@@ -117,10 +102,7 @@
         <p class="mt-4 font-semibold text-green-800">— Sneha M.</p>
       </div>
     </div>
-  </section>
-
-  <!-- Contact Section -->
-  <section id="contact" class="bg-green-100 py-16 px-6 text-center" data-aos="fade-up">
+  </section>  <!-- Contact Section -->  <section id="contact" class="bg-green-100 py-16 px-6 text-center" data-aos="fade-up">
     <div class="max-w-3xl mx-auto">
       <h3 class="text-3xl font-bold text-green-800 mb-6">Get in Touch</h3>
       <form id="contactForm" class="space-y-4">
@@ -133,30 +115,20 @@
       </form>
       <p id="formMessage" class="mt-4 text-green-700"></p>
     </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="bg-green-600 text-white text-center py-4">
+  </section>  <!-- Footer -->  <footer class="bg-green-600 text-white text-center py-4">
     <p>&copy; 2025 Dosa Plaza. All rights reserved.</p>
-  </footer>
-
-  <!-- Scripts -->
-  <script>
-    // Toggle menu modal
+  </footer>  <!-- Scripts -->  <script>
     function openMenu() {
       document.getElementById('menuModal').classList.remove('hidden');
     }
     function closeMenu() {
       document.getElementById('menuModal').classList.add('hidden');
     }
+    function toggleDrawer() {
+      const drawer = document.getElementById('mobileDrawer');
+      drawer.classList.toggle('hidden');
+    }
 
-    // Mobile nav toggle
-    document.getElementById('menuToggle').addEventListener('click', function () {
-      const mobileNav = document.getElementById('mobileNav');
-      mobileNav.classList.toggle('hidden');
-    });
-
-    // Contact form handling
     document.getElementById("contactForm").addEventListener("submit", async (e) => {
       e.preventDefault();
       const form = e.target;
@@ -174,11 +146,10 @@
       msg.textContent = res.ok ? "Message sent successfully!" : "Failed to send message.";
       if (res.ok) form.reset();
     });
-  </script>
-
-  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-  <script>
-    AOS.init({ duration: 1000, once: true });
-  </script>
-</body>
+  </script>  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>  <script>
+    AOS.init({
+      duration: 1000,
+      once: true
+    });
+  </script></body>
 </html>
